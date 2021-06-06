@@ -41,7 +41,7 @@ namespace Lab11
                 decimal D = 0;
                 decimal error_av;
                 decimal error_var;
-                decimal chi_squared = 0;
+                decimal chi_square = 0;
 
                 for (int i = 0; i < SC.size; i++)
                 {
@@ -49,25 +49,25 @@ namespace Lab11
                     var += pointsXY[i] * (i + 1) * (i + 1);
                     E += SC.prob[i] * (i + 1);
                     D += SC.prob[i] * (i + 1) * (i + 1);
-                    chi_squared += (SC.stat[i] * SC.stat[i]) / (SC.N * SC.prob[i]);
+                    chi_square += (SC.stat[i] * SC.stat[i]) / (SC.N * SC.prob[i]);
                 }
                 D -= E * E;
                 var -= av * av;
                 error_var = Decimal.Round(Math.Abs((var - D) / E) * 100);
                 error_av = Decimal.Round(Math.Abs((av - E) / D) * 100);
-                chi_squared -= SC.N;
+                chi_square -= SC.N;
                 average.Text = av.ToString();
                 variance.Text = var.ToString();
                 error1.Text = Convert.ToString(error_av);
                 error2.Text = Convert.ToString(error_var);
-                if (chi_squared > 9.488M)
+                if (chi_square > 9.488M)
                 {
-                    chi.Text = Convert.ToString(Decimal.Round(chi_squared, 2)) + "> 9,488";
+                    chi.Text = Convert.ToString(Decimal.Round(chi_square, 2)) + "> 9,488";
                     state.Text = "is false";
                 }
                 else
                 {
-                    chi.Text = Convert.ToString(Decimal.Round(chi_squared, 2)) + "< 9,488";
+                    chi.Text = Convert.ToString(Decimal.Round(chi_square, 2)) + "< 9,488";
                     state.Text = "is true";
                 }
             }
